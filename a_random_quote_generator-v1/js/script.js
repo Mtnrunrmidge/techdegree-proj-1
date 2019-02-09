@@ -108,17 +108,11 @@ function getRandomNumber(){
 	return Math.floor((Math.random() * quotes.length));
 }
 
-/***
-  Create the `printQuote` function to: 
-   - call the `getRandomQuote` function and assign it to a variable.
-   - use the properties of the quote object stored in the variable to 
-     create your HTML string.
-   - use conditionals to make sure the optional properties exist before 
-     they are added to the HTML string.
-   - set the `innerHTML` of the `quote-box` div to the HTML string. 
-***/
-
-
+/**
+*	Get random quote from quotes.
+*	Format the quote data into an HTML string.
+*	Print the html string to the page.
+**/
 function printQuote(){
 	var randQuote = getRandomQuote();
 
@@ -126,6 +120,11 @@ function printQuote(){
 	document.getElementById("quote-box").innerHTML = finalString;
 }
 
+/**
+*	Function to format the html string displayed on the page.
+*	Param: randQuote is a Quote object.
+*	Return: HTML string
+**/
 function FormatFinalHTMLString(randQuote){
 	var str = "<p class='quote'>" + randQuote.quote + "<\p><p class='source'>" + randQuote.source + "<\p>";
 	var c = "<span class='citation'>" + randQuote.citation + "</span>";
@@ -142,8 +141,14 @@ function FormatFinalHTMLString(randQuote){
 	return str;
 }
 
-function isEmptyOrWhiteSpace(s){
-    return s === null || s === "";
+/**
+*	Function to check if the string is null or whitespace.
+*	Params: str is a string
+*	Return value is bool True if the string is null or whitespace 
+* 		or False if not null or whitespace.
+**/
+function isEmptyOrWhiteSpace(str){
+    return str === null || str === "";
 }
 
 /***
@@ -154,6 +159,3 @@ function isEmptyOrWhiteSpace(s){
 ***/
 
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
