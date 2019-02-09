@@ -88,16 +88,25 @@ var quotes = [
 	}
 ];
 
+/**
+*	The getRandomQuote function returns a quote selected at random.
+*	No params	
+*	return value is a quote object
+**/
+function getRandomQuote(){
+	var index = getRandomNumber();
+	return quotes[index];
+}
 
-/***
-  Create the `getRandomQuote` function to:
-   - generate a random number 
-   - use the random number to `return` a random quote object from the 
-     `quotes` array.
-***/
-
-
-
+/**
+*	The getRandomNumber function returns a random number 
+*	between 0 and one less than the length of the quotes array.
+*	No params
+*	return value: a number
+**/
+function getRandomNumber(){
+	return Math.floor((Math.random() * quotes.length));
+}
 
 /***
   Create the `printQuote` function to: 
@@ -110,7 +119,32 @@ var quotes = [
 ***/
 
 
+function printQuote(){
+	var randQuote = getRandomQuote();
 
+	var finalString = FormatFinalHTMLString(randQuote);
+	document.getElementById("quote-box").innerHTML = finalString;
+}
+
+function FormatFinalHTMLString(randQuote){
+	var str = "<p class='quote'>" + randQuote.quote + "<\p><p class='source'>" + randQuote.source + "<\p>";
+	var c = "<span class='citation'>" + randQuote.citation + "</span>";
+	var y = "<span class='year'>" + randQuote.year + "</span>";
+	
+	if(!isEmptyOrWhiteSpace(randQuote.citation) && !isEmptyOrWhiteSpace(randQuote.year)){
+		str = "<p class='quote'>" + randQuote.quote + "<\p><p class='source'>" + randQuote.source + c + y + "<\p>";
+	}		
+	else if(!isEmptyOrWhiteSpace(randQuote.citation)){
+		str = "<p class='quote'>" + randQuote.quote + "<\p><p class='source'>" + randQuote.source + c + "<\p>";
+	}else if(!isEmptyOrWhiteSpace(randQuote.year)){
+		str = "<p class='quote'>" + randQuote.quote + "<\p><p class='source'>" + randQuote.source + y + "<\p>";
+	}
+	return str;
+}
+
+function isEmptyOrWhiteSpace(s){
+    return s === null || s === "";
+}
 
 /***
   When the "Show another quote" button is clicked, the event listener 
